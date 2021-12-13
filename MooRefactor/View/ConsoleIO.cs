@@ -1,0 +1,147 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace MooRefactor.View
+{
+    public class ConsoleIO : IUserInterface
+    {
+        string IUserInterface.ChooseGameUI()
+        {
+            string gameNumber = "";
+
+            OutputWriteLine("We currently have two games to play.");
+            OutputWriteLine("1: Bulls & Cows [Difficult] - A fun, but tricky, game about guessing 4 random numbers position.");
+            OutputWriteLine("2: Secret number [Easy] - Guess the secret number between 1-100.");
+            OutputWriteLine("Q: Exit program.");
+
+            while (gameNumber.Length < 1)
+            {
+                switch (Console.ReadKey(true).Key)
+                {
+                    case ConsoleKey.D1:
+                        gameNumber = "CowsAndBulls";
+                        break;
+                    case ConsoleKey.D2:
+                        gameNumber = "Numbers";
+                        break;
+                    case ConsoleKey.Q:
+                        Environment.Exit(0);
+                        break;
+                    case ConsoleKey.D0:
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        OutputWriteLine("Unvalid input. Try pressing one of the numbered choices above.");
+                        Console.ResetColor();
+                        break;
+                }
+            }
+
+            return gameNumber;
+        }
+
+        void IUserInterface.IntroMsg(string gameName)
+        {
+            if (gameName == "CowsAndBulls")
+            {
+                OutputWriteLine("\n" +
+    "   /$$$$$$$            /$$ /$$                  /$$$            /$$$$$$                                   \n" +
+    "  | $$__  $$          | $$| $$                 /$$ $$          /$$__  $$                                  \n" +
+    "  | $$  \\ $$ /$$   /$$| $$| $$  /$$$$$$$      |  $$$          | $$  \\__ /  /$$$$$$  /$$  /$$  /$$  /$$$$$$$ \n" +
+    "  | $$$$$$$ | $$  | $$| $$| $$ /$$_____/       /$$ $$/$$      | $$       /$$__  $$| $$ | $$ | $$ /$$_____ /\n" +
+    "  | $$__  $$| $$  | $$| $$| $$|  $$$$$$       | $$  $$_/      | $$      | $$  \\ $$| $$ | $$ | $$|  $$$$$$ \n" +
+    "  | $$  \\ $$| $$  | $$| $$| $$ \\____  $$      | $$\\  $$       | $$    $$| $$  | $$| $$ | $$ | $$ \\____  $$\n" +
+    "  | $$$$$$$/|  $$$$$$/| $$| $$ /$$$$$$$/      |  $$$$/$$      |  $$$$$$/|  $$$$$$/|  $$$$$/$$$$/ /$$$$$$$/\n" +
+    "  |_______/  \\______/ |__/|__/|_______/        \\____/\\_/       \\______/  \\______/  \\_____/\\___/ |_______/ \n");
+
+                OutputWriteLine("Hi, and welcome to Bulls and Cows!");
+                OutputWriteLine("Rules: If the four (4) matching digits are in their right positions, they are \"bulls\" (\"B\"), \n" +
+                    "       if in different positions, they are \"cows\" (\"C\").\n");
+            }
+            else
+            {
+                OutputWriteLine("\n" +
+"  $$\\   $$\\                         $$\\                                     $$\\ \n" +
+"  $$$\\  $$ |                        $$ |                                    $$ | \n" +
+"  $$$$\\ $$ |$$\\   $$\\ $$$$$$\\$$$$\\  $$$$$$$\\   $$$$$$\\   $$$$$$\\   $$$$$$$\\ $$ |  \n" +
+"  $$ $$\\$$ |$$ |  $$ |$$  _$$  _$$\\ $$  __$$\\ $$  __$$\\ $$  __$$\\ $$  _____|$$ |  \n" +
+"  $$ \\$$$$ |$$ |  $$ |$$ / $$ / $$ |$$ |  $$ |$$$$$$$$ |$$ |  \\__|\\$$$$$$\\  \\__|  \n" +
+"  $$ |\\$$$ |$$ |  $$ |$$ | $$ | $$ |$$ |  $$ |$$   ____|$$ |       \\____$$\\  \n" +
+"  $$ | \\$$ |\\$$$$$$  |$$ | $$ | $$ |$$$$$$$  |\\$$$$$$$\\ $$ |      $$$$$$$  |$$\\ \n" +
+"  \\__|  \\__| \\______/ \\__| \\__| \\__|\\_______/  \\_______|\\__|      \\_______/ \\__| \n");
+
+
+                OutputWriteLine("Hi, and welcome to this number guessing game!");
+                OutputWriteLine("Rules: Guess a number between 0 and 100. The game will tell you if your guess is too high\n" +
+                    "       or too low. Try to get as few guesses as possible. There is a highscore!\n");
+            }
+
+        }
+
+        public string Input() => Console.ReadLine().Trim();
+
+        public string InputUserName()
+        {
+            OutputWrite("Start game by entering your username: ");
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            string userName = Input();
+            Console.ResetColor();
+
+            return userName;
+        }
+
+        public void OutputWriteLine(string s) => Console.WriteLine(s);
+        public void OutputWrite(string s) => Console.Write(s);
+
+        void IUserInterface.GameStartText() => OutputWriteLine("\n~'~ Press [H] to see the secret number ~'~\n" +
+                                                                "~'~ New game started. Make your guess ~'~");
+
+        void IUserInterface.ClearScreen() => Console.Clear();
+
+        bool IUserInterface.Exit() => Console.ReadKey(true).Key == ConsoleKey.Y;
+
+        public void GoodbyeMsg()
+        {
+            string goodbye = "\nThanks for playing!";
+            string goodbye2 = "\nThe program will now close.";
+
+            char[] arr1;
+            arr1 = goodbye.ToCharArray();
+
+            char[] arr2;
+            arr2 = goodbye2.ToCharArray();
+
+            foreach (var s in arr1)
+            {
+                OutputWrite(s.ToString());
+                Thread.Sleep(50);
+            }
+
+            Thread.Sleep(150);
+
+            foreach (var s in arr2)
+            {
+                OutputWrite(s.ToString());
+                Thread.Sleep(50);
+            }
+
+            OutputWriteLine("");
+        }
+
+        public void ProgressBar()
+        {
+            using var progress = new ProgressBar();
+            for (int i = 0; i <= 100; i++)
+            {
+                progress.Report((double)i / 100);
+                Thread.Sleep(20);
+            }
+        }
+    }
+}
