@@ -37,6 +37,7 @@ namespace MooRefactor.View
                         break;
                     default:
                         Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Black;
                         OutputWriteLine("Unvalid input. Try pressing one of the numbered choices above.");
                         Console.ResetColor();
                         break;

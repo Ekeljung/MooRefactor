@@ -32,45 +32,11 @@ namespace MooRefactor.Controller
 
         public void Run()
         {
-            //const int COUNT = 100000;
-            //HashSet<int> hashSetOfInts = new HashSet<int>();
-            //Stopwatch stopWatch = new Stopwatch();
-            //for (int i = 0; i < COUNT; i++)
-            //{
-            //    hashSetOfInts.Add(i);
-            //}
-
-            //stopWatch.Start();
-            //for (int i = 0; i < COUNT; i++)
-            //{
-            //    hashSetOfInts.Contains(i);
-            //}
-            //stopWatch.Stop();
-
-            //Console.WriteLine(stopWatch.Elapsed);
-
-            //stopWatch.Reset();
-            //List<int> listOfInts = new List<int>();
-            //for (int i = 0; i < COUNT; i++)
-            //{
-            //    listOfInts.Add(i);
-            //}
-
-            //stopWatch.Start();
-            //for (int i = 0; i < COUNT; i++)
-            //{
-            //    listOfInts.Contains(i);
-            //}
-            //stopWatch.Stop();
-
-            //Console.WriteLine(stopWatch.Elapsed);
-            //Console.Read();
-            //Console.ReadLine();
-
             do
             {
                 int numOfGuesses = 1;
                 string secretNumber;
+                List<PlayerData> results = new();
 
                 _ui.ClearScreen();
                 gameName = _ui.ChooseGameUI();
@@ -107,19 +73,22 @@ namespace MooRefactor.Controller
                 }
                 catch (Exception e)
                 {
-                    _ui.OutputWriteLine("Something went wrong when trying to save to file. " + e.Message);
-                    throw;
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    _ui.OutputWriteLine("WARNING: omething went wrong when trying to save to file.\n\"" + e.Message + "\"");
+                    Console.ResetColor();
                 }
 
-                List<PlayerData> results = new();
                 try
                 {
                     results = _data.Read(gameName);
                 }
                 catch (Exception e)
                 {
-                    _ui.OutputWriteLine("Something went wrong trying to read from file. " + e.Message);
-                    throw;
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    _ui.OutputWriteLine("WARNING: Something went wrong trying to read from file.\n\"" + e.Message + "\"");
+                    Console.ResetColor();
                 }
 
                 _ui.ShowHighScoreByAverage(results, userName);

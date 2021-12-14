@@ -14,7 +14,7 @@ namespace MooRefactor
             IDataFile data = new DataFile();
             IGameLogic game = new MooGame(ui);
             IGameLogic game2 = new GuessSecretNumber(ui);
-            //Modify ConsoleIO.ChooseGameUI(), ganemName-property and if statements in GameController when adding/changing games.
+            //Modify ConsoleIO.ChooseGameUI(), gameName-property and if statements in GameController when adding/changing games.
 
             GameController controller = new(ui, game, game2, data);
             controller.Run();

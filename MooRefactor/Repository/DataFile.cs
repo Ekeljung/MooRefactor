@@ -11,20 +11,11 @@ namespace MooRefactor.Repository
 {
     public class DataFile : IDataFile
     {
-        //private readonly IUserInterface _ui;
-
-        //public DataFile(IUserInterface ui)
-        //{
-        //    _ui = ui;
-        //}
-
-
         void IDataFile.Save(string userName, int numOfGuesses, string gameName)
         {
             using (StreamWriter output = new(gameName + "Highscore.txt", append: true))
             {
                 output.WriteLine(userName + "-#-" + numOfGuesses);
-                output.Close();
             }
         }
 
@@ -32,7 +23,6 @@ namespace MooRefactor.Repository
         {
             List<PlayerData> results = new();
             string line;
-            string name = "";
 
             try
             {
@@ -41,7 +31,7 @@ namespace MooRefactor.Repository
                     while ((line = sr.ReadLine()) != null)
                     {
                         string[] nameAndScore = line.Split(new string[] { "-#-" }, StringSplitOptions.None);
-                        name = nameAndScore[0];
+                        string name = nameAndScore[0];
                         int guesses = Convert.ToInt32(nameAndScore[1]);
                         PlayerData player = new(name, guesses);
 
@@ -55,8 +45,6 @@ namespace MooRefactor.Repository
             }
             catch (Exception e)
             {
-                //_ui.OutputWriteLine("The file could not be read:");
-                //_ui.OutputWriteLine(e.Message);
                 throw new Exception(e.Message);
             }
 
