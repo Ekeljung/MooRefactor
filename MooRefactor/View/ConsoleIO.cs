@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MooRefactor.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -142,6 +143,31 @@ namespace MooRefactor.View
             {
                 progress.Report((double)i / 100);
                 Thread.Sleep(20);
+            }
+        }
+
+        void IUserInterface.ShowHighScoreByAverage(List<PlayerData> results, string userName)
+        {
+            results.Sort((p1, p2) => p1.Average().CompareTo(p2.Average()));
+
+            OutputWrite("\n=========");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            OutputWrite("LEADERBOARD");
+            Console.ResetColor();
+            OutputWriteLine("=========\nPlayer      Games     Average\n=============================");
+
+            foreach (var p in results)
+            {
+                if (p.Name == userName)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    OutputWriteLine(string.Format("{0,-10}{1,7:D}{2,12:F2}", p.Name, p.NGames, p.Average()));
+                    Console.ResetColor();
+                }
+                else
+                {
+                    OutputWriteLine(string.Format("{0,-10}{1,7:D}{2,12:F2}", p.Name, p.NGames, p.Average()));
+                }
             }
         }
     }

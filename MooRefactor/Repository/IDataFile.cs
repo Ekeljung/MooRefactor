@@ -10,6 +10,6 @@ namespace MooRefactor.Repository
     public interface IDataFile
     {
         void Save(string userName, int numOfGuesses, string gameName);
-        void HighscoreByAverage(string gameName);
+        public List<PlayerData> Read(string gameName);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MooRefactor.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,5 +20,6 @@ namespace MooRefactor.View
         bool Exit();
         void GoodbyeMsg();
         void ProgressBar();
+        void ShowHighScoreByAverage(List<PlayerData> results, string userName);
     }
 }

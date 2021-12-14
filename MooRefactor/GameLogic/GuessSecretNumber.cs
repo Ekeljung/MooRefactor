@@ -13,7 +13,7 @@ namespace MooRefactor.Models
 
         public GuessSecretNumber(IUserInterface ui)
         {
-            this._ui = ui;
+            _ui = ui;
         }
 
         public string InputGuess(int numOfGuesses, string secretNumber)

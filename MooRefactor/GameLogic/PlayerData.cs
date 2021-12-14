@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MooRefactor.Models
 {
-    class PlayerData
+    public class PlayerData
     {
         public string Name { get; private set; }
         public int NGames { get; private set; }
@@ -15,7 +15,7 @@ namespace MooRefactor.Models
 
         public PlayerData(string name, int guesses)
         {
-            this.Name = name;
+            Name = name;
             NGames = 1;
             totalGuess = guesses;
         }

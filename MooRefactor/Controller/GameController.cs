@@ -101,10 +101,29 @@ namespace MooRefactor.Controller
                     numOfGuesses = _game2.CheckSecretNumber(numOfGuesses, secretNumber, guess);
                 }
 
-                _data.Save(userName, numOfGuesses, gameName);
-                _data.HighscoreByAverage(gameName);
+                try
+                {
+                    _data.Save(userName, numOfGuesses, gameName);
+                }
+                catch (Exception e)
+                {
+                    _ui.OutputWriteLine("Something went wrong when trying to save to file. " + e.Message);
+                    throw;
+                }
 
-                _ui.OutputWriteLine("Correct, it took " + numOfGuesses + (numOfGuesses > 1 ? " guesses." : " guess.") + 
+                List<PlayerData> results = new();
+                try
+                {
+                    results = _data.Read(gameName);
+                }
+                catch (Exception e)
+                {
+                    _ui.OutputWriteLine("Something went wrong trying to read from file. " + e.Message);
+                    throw;
+                }
+
+                _ui.ShowHighScoreByAverage(results, userName);
+                _ui.OutputWriteLine("Correct, it took " + numOfGuesses + (numOfGuesses > 1 ? " guesses." : " guess.") +
                     "\n\nPress [Y]es to play some more or any other key to exit the program.");
 
                 playGame = _ui.Exit();
