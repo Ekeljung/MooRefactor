@@ -97,6 +97,7 @@ namespace MooRefactor.View
         }
 
         public void OutputWriteLine(string s) => Console.WriteLine(s);
+
         public void OutputWrite(string s) => Console.Write(s);
 
         void IUserInterface.GameStartText() => OutputWriteLine("\n~'~ Press [H] to see the secret number ~'~\n" +
