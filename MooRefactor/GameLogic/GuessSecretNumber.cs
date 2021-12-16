@@ -9,12 +9,7 @@ namespace MooRefactor.Models
 {
     public class GuessSecretNumber : IGameLogic
     {
-        private readonly IUserInterface _ui;
-
-        public GuessSecretNumber(IUserInterface ui)
-        {
-            _ui = ui;
-        }
+        readonly ConsoleIO ui = new();
 
         public GuessSecretNumber()
         {
@@ -22,30 +17,30 @@ namespace MooRefactor.Models
 
         public string InputGuess(int numOfGuesses, string secretNumber)
         {
-            _ui.OutputWrite("Guess #" + numOfGuesses + ": ");
-            string guess = _ui.Input();
+            ui.OutputWrite("Guess #" + numOfGuesses + ": ");
+            string guess = ui.Input();
             while (!int.TryParse(guess, out _))
             {
                 if (guess.ToUpper() == "H")
                 {
-                    _ui.OutputWrite("The secret number is: ");
+                    ui.OutputWrite("The secret number is: ");
                     Console.ForegroundColor = ConsoleColor.Red;
-                    _ui.OutputWriteLine(secretNumber);
+                    ui.OutputWriteLine(secretNumber);
                     Console.ResetColor();
 
-                    _ui.OutputWrite("Guess #" + numOfGuesses + ": ");
-                    guess = _ui.Input();
+                    ui.OutputWrite("Guess #" + numOfGuesses + ": ");
+                    guess = ui.Input();
                 }
                 else
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.ForegroundColor = ConsoleColor.Black;
-                    _ui.OutputWriteLine("Unvalid input: \"" + guess + "\". We are looking for four (4) numbers.");
+                    ui.OutputWriteLine("Unvalid input: \"" + guess + "\". We are looking for four (4) numbers.");
                     Console.Out.Flush();
                     Console.ResetColor();
 
-                    _ui.OutputWrite("Guess #" + numOfGuesses + ": ");
-                    guess = _ui.Input();
+                    ui.OutputWrite("Guess #" + numOfGuesses + ": ");
+                    guess = ui.Input();
                 }
             }
             return guess;
@@ -81,9 +76,9 @@ namespace MooRefactor.Models
             if (myGuess == mysecretNumber)
                 return "Correct";
             else if (myGuess > mysecretNumber)
-                _ui.OutputWriteLine("Too high");
+                ui.OutputWriteLine("Too high");
             else
-                _ui.OutputWriteLine("Too low");
+                ui.OutputWriteLine("Too low");
 
             return result;
         }

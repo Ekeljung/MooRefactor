@@ -11,12 +11,7 @@ namespace MooRefactor
 {
     public class MooGame : IGameLogic
     {
-        private readonly IUserInterface _ui;
-
-        public MooGame(IUserInterface ui)
-        {
-            _ui = ui;
-        }
+        readonly ConsoleIO ui = new();
 
         public MooGame()
         {
@@ -24,30 +19,30 @@ namespace MooRefactor
 
         public string InputGuess(int numOfGuesses, string secretNumber)
         {
-            _ui.OutputWrite("Guess #" + numOfGuesses + ": ");
-            string guess = _ui.Input();
+            ui.OutputWrite("Guess #" + numOfGuesses + ": ");
+            string guess = ui.Input();
 
             while (!int.TryParse(guess, out _) || (guess.Length != 4))
             {
                 if (guess.ToUpper() == "H")
                 {
-                    _ui.OutputWrite("The secret number is: ");
+                    ui.OutputWrite("The secret number is: ");
                     Console.ForegroundColor = ConsoleColor.Red;
-                    _ui.OutputWriteLine(secretNumber);
+                    ui.OutputWriteLine(secretNumber);
                     Console.ResetColor();
 
-                    _ui.OutputWrite("Guess #" + numOfGuesses + ": ");
-                    guess = _ui.Input();
+                    ui.OutputWrite("Guess #" + numOfGuesses + ": ");
+                    guess = ui.Input();
                 }
                 else
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.ForegroundColor = ConsoleColor.Black;
-                    _ui.OutputWriteLine("Unvalid input: \"" + guess + "\". We are looking for four (4) numbers.");
+                    ui.OutputWriteLine("Unvalid input: \"" + guess + "\". We are looking for four (4) numbers.");
                     Console.ResetColor();
 
-                    _ui.OutputWrite("Guess #" + numOfGuesses + ": ");
-                    guess = _ui.Input();
+                    ui.OutputWrite("Guess #" + numOfGuesses + ": ");
+                    guess = ui.Input();
                 }
             }
 
@@ -111,7 +106,7 @@ namespace MooRefactor
             }
 
             string bbcc = "BBBB".Substring(0, bulls) + "," + "CCCC".Substring(0, cows);
-            _ui.OutputWriteLine(bbcc);
+            ui.OutputWriteLine(bbcc);
 
             return bbcc;
         }

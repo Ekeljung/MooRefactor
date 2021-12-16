@@ -10,25 +10,21 @@ namespace MooRefactorTest
     [TestClass]
     public class UnitTest
     {
-        GameController controller;
         MooGame mooGame;
         GuessSecretNumber guessSecretNumberGame;
-        ConsoleIO ui;
 
         string secretNumber = "1234";
-        string testSecretNumber = "";
+        string testSecretNumber = "12";
         string guess = "";
         string result = "";
-        int numOfGuesses = 1;
 
         [TestInitialize]
         public void TestInit()
         {
-            controller = new();
             mooGame = new();
             guessSecretNumberGame = new();
-            ui = new();
         }
+
 
         [TestMethod]
         public void TestGetRandomNumber1to100()
@@ -42,6 +38,36 @@ namespace MooRefactorTest
 
             Assert.IsTrue(number);
         }
+
+        [TestMethod]
+        public void TestCalcSecretNumber1to100TooLow()
+        {
+            guess = "11";
+
+            string numb = guessSecretNumberGame.CalcSecretNumber(testSecretNumber, guess);
+            Assert.AreEqual("noMatch", numb);
+        }
+
+        [TestMethod]
+        public void TestCalcSecretNumber1to100TooHigh()
+        {
+            guess = "13";
+
+            string numb = guessSecretNumberGame.CalcSecretNumber(testSecretNumber, guess);
+            Assert.AreEqual("noMatch", numb);
+        }
+
+        [TestMethod]
+        public void TestCalcSecretNumber1to100Correct()
+        {
+            guess = "12";
+
+            string numb = guessSecretNumberGame.CalcSecretNumber(testSecretNumber, guess);
+            Assert.AreEqual("Correct", numb);
+        }
+
+
+
 
         [TestMethod]
         public void TestGetRandomNumber()
