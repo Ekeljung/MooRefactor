@@ -71,14 +71,29 @@ namespace MooRefactor.Models
         {
             int myGuess = int.Parse(guess);
             int mysecretNumber = int.Parse(secretNumber);
+            string minAndMaxValue = "The number is between 1 and 100.";
             string result = "noMatch";
 
             if (myGuess == mysecretNumber)
+            {
                 return "Correct";
+            }
             else if (myGuess > mysecretNumber)
                 ui.OutputWriteLine("Too high");
+
+                if (myGuess > 100)
+                {
+                    _ui.OutputWriteLine(minAndMaxValue);
+                }
+            }
             else
                 ui.OutputWriteLine("Too low");
+
+                if (myGuess < 1)
+                {
+                    _ui.OutputWriteLine(minAndMaxValue);
+                }
+            }
 
             return result;
         }
