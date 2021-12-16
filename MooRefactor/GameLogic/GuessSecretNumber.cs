@@ -79,19 +79,21 @@ namespace MooRefactor.Models
                 return "Correct";
             }
             else if (myGuess > mysecretNumber)
+            {
                 ui.OutputWriteLine("Too high");
 
                 if (myGuess > 100)
                 {
-                    _ui.OutputWriteLine(minAndMaxValue);
+                    ui.OutputWriteLine(minAndMaxValue);
                 }
             }
             else
+            {
                 ui.OutputWriteLine("Too low");
 
                 if (myGuess < 1)
                 {
-                    _ui.OutputWriteLine(minAndMaxValue);
+                    ui.OutputWriteLine(minAndMaxValue);
                 }
             }
 
