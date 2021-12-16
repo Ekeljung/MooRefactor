@@ -1,13 +1,7 @@
-﻿using MooRefactor.Models;
-using MooRefactor.Repository;
-using MooRefactor.View;
+﻿using MooRefactor.Interface;
+using MooRefactor.Model;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MooRefactor.Controller
 {

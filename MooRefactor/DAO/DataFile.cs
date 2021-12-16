@@ -1,13 +1,10 @@
-﻿using MooRefactor.Models;
-using MooRefactor.View;
+﻿using MooRefactor.Model;
+using MooRefactor.Interface;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MooRefactor.Repository
+namespace MooRefactor.DAL
 {
     public class DataFile : IDataFile
     {

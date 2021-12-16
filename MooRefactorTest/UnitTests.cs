@@ -1,8 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MooRefactor;
-using MooRefactor.Controller;
-using MooRefactor.Models;
-using MooRefactor.View;
+using MooRefactor.Games;
 using System;
 
 namespace MooRefactorTest

@@ -1,17 +1,14 @@
-﻿using MooRefactor.View;
+﻿using MooRefactor.Interface;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MooRefactor.View;
 
-namespace MooRefactor.Models
+namespace MooRefactor.Games
 {
-    public class GuessSecretNumber : IGameLogic
+    public class MooGame : IGameLogic
     {
         readonly ConsoleIO ui = new();
 
-        public GuessSecretNumber()
+        public MooGame()
         {
         }
 
@@ -19,7 +16,8 @@ namespace MooRefactor.Models
         {
             ui.OutputWrite("Guess #" + numOfGuesses + ": ");
             string guess = ui.Input();
-            while (!int.TryParse(guess, out _))
+
+            while (!int.TryParse(guess, out _) || (guess.Length != 4))
             {
                 if (guess.ToUpper() == "H")
                 {
@@ -36,32 +34,45 @@ namespace MooRefactor.Models
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.ForegroundColor = ConsoleColor.Black;
                     ui.OutputWriteLine("Unvalid input: \"" + guess + "\". We are looking for four (4) numbers.");
-                    Console.Out.Flush();
                     Console.ResetColor();
 
                     ui.OutputWrite("Guess #" + numOfGuesses + ": ");
                     guess = ui.Input();
                 }
             }
+
             return guess;
         }
 
         public string GetRandomNumber()
         {
             Random randomGenerator = new();
+            string secretNumber = "";
+            for (int i = 0; i < 4; i++)
+            {
+                int random = randomGenerator.Next(10);
+                string randomNumber = "" + random;
 
-            return randomGenerator.Next(1, 101).ToString();
+                while (secretNumber.Contains(randomNumber))
+                {
+                    random = randomGenerator.Next(10);
+                    randomNumber = "" + random;
+                }
+
+                secretNumber += randomNumber;
+            }
+            return secretNumber;
         }
 
         public int CheckSecretNumber(int numOfGuesses, string secretNumber, string guess)
         {
-            string result = CalcSecretNumber(secretNumber, guess);
+            string bbcc = CalcSecretNumber(secretNumber, guess);
 
-            while (result != "Correct")
+            while (bbcc != "BBBB,")
             {
                 numOfGuesses++;
                 guess = InputGuess(numOfGuesses, secretNumber);
-                result = CalcSecretNumber(secretNumber, guess);
+                bbcc = CalcSecretNumber(secretNumber, guess);
             }
 
             return numOfGuesses;
@@ -69,35 +80,30 @@ namespace MooRefactor.Models
 
         public string CalcSecretNumber(string secretNumber, string guess)
         {
-            int myGuess = int.Parse(guess);
-            int mysecretNumber = int.Parse(secretNumber);
-            string minAndMaxValue = "The number is between 1 and 100.";
-            string result = "noMatch";
+            int cows = 0, bulls = 0;
 
-            if (myGuess == mysecretNumber)
+            for (int i = 0; i < 4; i++)
             {
-                return "Correct";
-            }
-            else if (myGuess > mysecretNumber)
-            {
-                ui.OutputWriteLine("Too high");
-
-                if (myGuess > 100)
+                for (int j = 0; j < 4; j++)
                 {
-                    ui.OutputWriteLine(minAndMaxValue);
-                }
-            }
-            else
-            {
-                ui.OutputWriteLine("Too low");
-
-                if (myGuess < 1)
-                {
-                    ui.OutputWriteLine(minAndMaxValue);
+                    if (secretNumber[i] == guess[j])
+                    {
+                        if (i == j)
+                        {
+                            bulls++;
+                        }
+                        else
+                        {
+                            cows++;
+                        }
+                    }
                 }
             }
 
-            return result;
+            string bbcc = "BBBB".Substring(0, bulls) + "," + "CCCC".Substring(0, cows);
+            ui.OutputWriteLine(bbcc);
+
+            return bbcc;
         }
     }
 }

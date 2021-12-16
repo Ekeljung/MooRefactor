@@ -1,11 +1,7 @@
-﻿using MooRefactor.Models;
-using System;
+﻿using MooRefactor.Model;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MooRefactor.Repository
+namespace MooRefactor.Interface
 {
     public interface IDataFile
     {

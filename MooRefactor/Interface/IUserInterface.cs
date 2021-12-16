@@ -1,11 +1,7 @@
-﻿using MooRefactor.Models;
-using System;
+﻿using MooRefactor.Model;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MooRefactor.View
+namespace MooRefactor.Interface
 {
     public interface IUserInterface
     {

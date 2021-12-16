@@ -1,8 +1,8 @@
 ﻿using MooRefactor.Controller;
-using MooRefactor.Models;
-using MooRefactor.Repository;
+using MooRefactor.DAL;
+using MooRefactor.Games;
+using MooRefactor.Interface;
 using MooRefactor.View;
-using System;
 
 namespace MooRefactor
 {
