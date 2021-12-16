@@ -16,6 +16,10 @@ namespace MooRefactor.Models
             _ui = ui;
         }
 
+        public GuessSecretNumber()
+        {
+        }
+
         public string InputGuess(int numOfGuesses, string secretNumber)
         {
             _ui.OutputWrite("Guess #" + numOfGuesses + ": ");

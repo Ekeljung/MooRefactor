@@ -21,6 +21,10 @@ namespace MooRefactor.Controller
             _data = data;
         }
 
+        public GameController()
+        {
+        }
+
         private readonly IUserInterface _ui;
         private readonly IGameLogic _game1;
         private readonly IGameLogic _game2;
@@ -75,7 +79,7 @@ namespace MooRefactor.Controller
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.ForegroundColor = ConsoleColor.Black;
-                    _ui.OutputWriteLine("WARNING: omething went wrong when trying to save to file.\n\"" + e.Message + "\"");
+                    _ui.OutputWriteLine("WARNING: Something went wrong when trying to save to file.\n\"" + e.Message + "\"");
                     Console.ResetColor();
                 }
 

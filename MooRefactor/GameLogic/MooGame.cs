@@ -18,6 +18,10 @@ namespace MooRefactor
             _ui = ui;
         }
 
+        public MooGame()
+        {
+        }
+
         public string InputGuess(int numOfGuesses, string secretNumber)
         {
             _ui.OutputWrite("Guess #" + numOfGuesses + ": ");
