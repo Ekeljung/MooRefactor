@@ -15,10 +15,6 @@ namespace MooRefactor.Controller
             _data = data;
         }
 
-        public GameController()
-        {
-        }
-
         private readonly IUserInterface _ui;
         private readonly IGameLogic _game1;
         private readonly IGameLogic _game2;
@@ -38,6 +34,7 @@ namespace MooRefactor.Controller
 
                 _ui.ClearScreen();
                 gameName = _ui.ChooseGameUI();
+
                 if (gameName == "CowsAndBulls")
                 {
                     secretNumber = _game1.GetRandomNumber();
@@ -49,9 +46,7 @@ namespace MooRefactor.Controller
 
                 _ui.ClearScreen();
                 _ui.IntroMsg(gameName);
-
                 userName = _ui.InputUserName();
-                //PlayerData pd = new(userName, numOfGuesses);
                 _ui.GameStartText();
 
                 if (gameName == "CowsAndBulls")

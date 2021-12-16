@@ -48,6 +48,7 @@ namespace MooRefactor.Games
         {
             Random randomGenerator = new();
             string secretNumber = "";
+
             for (int i = 0; i < 4; i++)
             {
                 int random = randomGenerator.Next(10);
@@ -61,6 +62,7 @@ namespace MooRefactor.Games
 
                 secretNumber += randomNumber;
             }
+
             return secretNumber;
         }
 

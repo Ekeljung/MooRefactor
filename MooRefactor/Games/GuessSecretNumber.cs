@@ -16,6 +16,7 @@ namespace MooRefactor.Games
         {
             ui.OutputWrite("Guess #" + numOfGuesses + ": ");
             string guess = ui.Input();
+
             while (!int.TryParse(guess, out _))
             {
                 if (guess.ToUpper() == "H")
@@ -40,6 +41,7 @@ namespace MooRefactor.Games
                     guess = ui.Input();
                 }
             }
+
             return guess;
         }
 
