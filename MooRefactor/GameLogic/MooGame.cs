@@ -57,21 +57,21 @@ namespace MooRefactor
         public string GetRandomNumber()
         {
             Random randomGenerator = new();
-            string goal = "";
+            string secretNumber = "";
             for (int i = 0; i < 4; i++)
             {
                 int random = randomGenerator.Next(10);
                 string randomNumber = "" + random;
 
-                while (goal.Contains(randomNumber))
+                while (secretNumber.Contains(randomNumber))
                 {
                     random = randomGenerator.Next(10);
                     randomNumber = "" + random;
                 }
 
-                goal += randomNumber;
+                secretNumber += randomNumber;
             }
-            return goal;
+            return secretNumber;
         }
 
         public int CheckSecretNumber(int numOfGuesses, string secretNumber, string guess)
@@ -91,7 +91,7 @@ namespace MooRefactor
         public string CalcSecretNumber(string secretNumber, string guess)
         {
             int cows = 0, bulls = 0;
-            //guess += "    ";     // if player entered less than 4 chars
+
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
