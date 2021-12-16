@@ -28,9 +28,13 @@ namespace MooRefactor.View
                         gameNumber = "Numbers";
                         break;
                     case ConsoleKey.Q:
+                        GoodbyeMsg();
+                        ProgressBar();
                         Environment.Exit(0);
                         break;
                     case ConsoleKey.D0:
+                        GoodbyeMsg();
+                        ProgressBar();
                         Environment.Exit(0);
                         break;
                     default:
