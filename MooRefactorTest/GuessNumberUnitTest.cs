@@ -37,27 +37,29 @@ namespace MooRefactorTest
         public void CalcSecretNumber1to100TooLowTest()
         {
             guess = "11";
-
+            result = "noMatch";
             string numb = guessSecretNumberGame.CalcSecretNumber(testSecretNumber, guess);
-            Assert.AreEqual("noMatch", numb);
+            Assert.AreEqual(result, numb);
         }
 
         [TestMethod]
         public void CalcSecretNumber1to100TooHighTest()
         {
             guess = "13";
+            result = "noMatch";
 
             string numb = guessSecretNumberGame.CalcSecretNumber(testSecretNumber, guess);
-            Assert.AreEqual("noMatch", numb);
+            Assert.AreEqual(result, numb);
         }
 
         [TestMethod]
         public void CalcSecretNumber1to100CorrectTest()
         {
             guess = "12";
+            result = "Correct";
 
             string numb = guessSecretNumberGame.CalcSecretNumber(testSecretNumber, guess);
-            Assert.AreEqual("Correct", numb);
+            Assert.AreEqual(result, numb);
         }
     }
 }
