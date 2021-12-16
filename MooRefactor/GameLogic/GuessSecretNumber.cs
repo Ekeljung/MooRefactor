@@ -24,6 +24,7 @@ namespace MooRefactor.Models
         {
             _ui.OutputWrite("Guess #" + numOfGuesses + ": ");
             string guess = _ui.Input();
+
             while (!int.TryParse(guess, out _))
             {
                 if (guess.ToUpper() == "H")
@@ -76,14 +77,31 @@ namespace MooRefactor.Models
         {
             int myGuess = int.Parse(guess);
             int mysecretNumber = int.Parse(secretNumber);
+            string minAndMaxValue = "The number is between 1 and 100.";
             string result = "noMatch";
 
             if (myGuess == mysecretNumber)
+            {
                 return "Correct";
+            }
             else if (myGuess > mysecretNumber)
+            {
                 _ui.OutputWriteLine("Too high");
+
+                if (myGuess > 100)
+                {
+                    _ui.OutputWriteLine(minAndMaxValue);
+                }
+            }
             else
+            {
                 _ui.OutputWriteLine("Too low");
+
+                if (myGuess < 1)
+                {
+                    _ui.OutputWriteLine(minAndMaxValue);
+                }
+            }
 
             return result;
         }
