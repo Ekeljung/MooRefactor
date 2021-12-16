@@ -8,50 +8,9 @@ namespace MooRefactor.View
 {
     public class ConsoleIO : IUserInterface
     {
-        string IUserInterface.ChooseGameUI()
-        {
-            string gameNumber = "";
-
-            OutputWriteLine("We currently have two games to play.");
-            OutputWriteLine("1: Bulls & Cows [Difficult] - A fun, but tricky, game about guessing 4 random numbers position.");
-            OutputWriteLine("2: Secret number [Easy] - Guess the secret number between 1-100.");
-            OutputWriteLine("Q: Exit program.");
-
-            while (gameNumber.Length < 1)
-            {
-                switch (Console.ReadKey(true).Key)
-                {
-                    case ConsoleKey.D1:
-                        gameNumber = "CowsAndBulls";
-                        break;
-                    case ConsoleKey.D2:
-                        gameNumber = "Numbers";
-                        break;
-                    case ConsoleKey.Q:
-                        GoodbyeMsg();
-                        ProgressBar();
-                        Environment.Exit(0);
-                        break;
-                    case ConsoleKey.D0:
-                        GoodbyeMsg();
-                        ProgressBar();
-                        Environment.Exit(0);
-                        break;
-                    default:
-                        Console.BackgroundColor = ConsoleColor.Red;
-                        Console.ForegroundColor = ConsoleColor.Black;
-                        OutputWriteLine("Unvalid input. Try pressing one of the numbered choices above.");
-                        Console.ResetColor();
-                        break;
-                }
-            }
-
-            return gameNumber;
-        }
-
         void IUserInterface.IntroMsg(string gameName)
         {
-            if (gameName == "CowsAndBulls")
+            if (gameName == "MooGame")
             {
                 OutputWriteLine("\n" +
     "   /$$$$$$$            /$$ /$$                  /$$$            /$$$$$$                                   \n" +

@@ -5,7 +5,6 @@ namespace MooRefactor.Interface
 {
     public interface IUserInterface
     {
-        string ChooseGameUI();
         void IntroMsg(string gameName);
         string InputUserName();
         string Input();

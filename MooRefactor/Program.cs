@@ -1,5 +1,4 @@
-﻿using MooRefactor.Controller;
-using MooRefactor.DAL;
+﻿using MooRefactor.DAL;
 using MooRefactor.Games;
 using MooRefactor.Interface;
 using MooRefactor.View;
@@ -16,7 +15,7 @@ namespace MooRefactor
             IGameLogic game2 = new GuessSecretNumber();
             //Modify ConsoleIO.ChooseGameUI(), gameName-property and if statements in GameController when adding/changing games.
 
-            GameController controller = new(ui, game, game2, data);
+            GameManager controller = new(ui, game, game2, data);
             controller.Run();
         }
     }

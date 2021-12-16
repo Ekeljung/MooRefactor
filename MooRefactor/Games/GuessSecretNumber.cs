@@ -34,7 +34,6 @@ namespace MooRefactor.Games
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.ForegroundColor = ConsoleColor.Black;
                     ui.OutputWriteLine("Unvalid input: \"" + guess + "\". We are looking for four (4) numbers.");
-                    Console.Out.Flush();
                     Console.ResetColor();
 
                     ui.OutputWrite("Guess #" + numOfGuesses + ": ");

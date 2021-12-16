@@ -3,11 +3,11 @@ using MooRefactor.Model;
 using System;
 using System.Collections.Generic;
 
-namespace MooRefactor.Controller
+namespace MooRefactor
 {
-    public class GameController
+    public class GameManager
     {
-        public GameController(IUserInterface ui, IGameLogic game, IGameLogic game2, IDataFile data)
+        public GameManager(IUserInterface ui, IGameLogic game, IGameLogic game2, IDataFile data)
         {
             _ui = ui;
             _game1 = game;
@@ -30,26 +30,23 @@ namespace MooRefactor.Controller
             {
                 int numOfGuesses = 1;
                 string secretNumber;
+
                 List<PlayerData> results = new();
 
                 _ui.ClearScreen();
-                gameName = _ui.ChooseGameUI();
-
-                if (gameName == "CowsAndBulls")
-                {
+                gameName = ChooseGameUI();
+                
+                if (gameName == _game1.GetType().Name)
                     secretNumber = _game1.GetRandomNumber();
-                }
                 else
-                {
                     secretNumber = _game2.GetRandomNumber();
-                }
 
                 _ui.ClearScreen();
                 _ui.IntroMsg(gameName);
                 userName = _ui.InputUserName();
                 _ui.GameStartText();
 
-                if (gameName == "CowsAndBulls")
+                if (gameName == _game1.GetType().Name)
                 {
                     string guess = _game1.InputGuess(numOfGuesses, secretNumber);
                     numOfGuesses = _game1.CheckSecretNumber(numOfGuesses, secretNumber, guess);
@@ -96,6 +93,45 @@ namespace MooRefactor.Controller
                 }
 
             } while (playGame);
+        }
+
+        string ChooseGameUI()
+        {
+            _ui.OutputWriteLine("We currently have two games to play.");
+            _ui.OutputWriteLine("1: Bulls & Cows [Difficult] - A fun, but tricky, game about guessing 4 random numbers position.");
+            _ui.OutputWriteLine("2: Secret number [Easy] - Guess the secret number between 1-100.");
+            _ui.OutputWriteLine("Q: Exit program.");
+
+            while (gameName.Length < 1)
+            {
+                switch (Console.ReadKey(true).Key)
+                {
+                    case ConsoleKey.D1:
+                        gameName = _game1.GetType().Name;
+                        break;
+                    case ConsoleKey.D2:
+                        gameName = _game2.GetType().Name;
+                        break;
+                    case ConsoleKey.Q:
+                        _ui.GoodbyeMsg();
+                        _ui.ProgressBar();
+                        Environment.Exit(0);
+                        break;
+                    case ConsoleKey.D0:
+                        _ui.GoodbyeMsg();
+                        _ui.ProgressBar();
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        _ui.OutputWriteLine("Unvalid input. Try pressing one of the numbered choices above.");
+                        Console.ResetColor();
+                        break;
+                }
+            }
+
+            return gameName;
         }
     }
 }
