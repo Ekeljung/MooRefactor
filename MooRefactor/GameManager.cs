@@ -22,7 +22,7 @@ namespace MooRefactor
 
         bool playGame = true;
         string userName = "";
-        string gameName = "";
+        //string gameName = "";
 
         public void Run()
         {
@@ -34,7 +34,7 @@ namespace MooRefactor
                 List<PlayerData> results = new();
 
                 _ui.ClearScreen();
-                gameName = ChooseGameUI();
+                string gameName = ChooseGameUI();
                 
                 if (gameName == _game1.GetType().Name)
                     secretNumber = _game1.GetRandomNumber();
@@ -97,6 +97,7 @@ namespace MooRefactor
 
         string ChooseGameUI()
         {
+            string gameName = "";
             _ui.OutputWriteLine("We currently have two games to play.");
             _ui.OutputWriteLine("1: Bulls & Cows [Difficult] - A fun, but tricky, game about guessing 4 random numbers position.");
             _ui.OutputWriteLine("2: Secret number [Easy] - Guess the secret number between 1-100.");
