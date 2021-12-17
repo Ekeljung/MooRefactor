@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace MooRefactor.DAL
+namespace MooRefactor.Data
 {
     public class DataFile : IDataFile
     {

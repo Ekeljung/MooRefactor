@@ -1,4 +1,4 @@
-﻿using MooRefactor.DAL;
+﻿using MooRefactor.Data;
 using MooRefactor.Games;
 using MooRefactor.Interface;
 using MooRefactor.View;
