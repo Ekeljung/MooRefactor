@@ -22,7 +22,6 @@ namespace MooRefactor
 
         bool playGame = true;
         string userName = "";
-        //string gameName = "";
 
         public void Run()
         {
